@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="somiah.jad.beatbox.SoundViewModel"/>
+    </data>
+
+
     <Button
         android:id="@+id/button_sound_id"
         android:layout_width="match_parent"
@@ -9,6 +16,7 @@
         tools:text="Sound Name"
         android:textColor="@color/colorAccent"
         android:background="@color/colorPrimaryLight"
+        android:text="@{viewModel.title}"
         android:layout_margin="5dp"/>
 
 </layout>
