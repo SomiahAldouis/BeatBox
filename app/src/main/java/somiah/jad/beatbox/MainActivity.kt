@@ -11,14 +11,20 @@ import somiah.jad.beatbox.databinding.ActivityMainBinding
 import somiah.jad.beatbox.databinding.ItemSoundBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var beatBox: BeatBox
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
+
+        beatBox = BeatBox(assets)
+
+
         val listBinding : ActivityMainBinding
                 = DataBindingUtil.setContentView(this,R.layout.activity_main)
         listBinding.recyclerView.apply {
             layoutManager = GridLayoutManager(context,3)
-            adapter = SoundAdapter()
+            adapter = SoundAdapter(beatBox.sounds)
         }
     }
 
@@ -26,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     RecyclerView.ViewHolder(itemBinding.root){
     }
 
-    private inner class SoundAdapter():
+    private inner class SoundAdapter(private val sounds: List<Sound>):
                     RecyclerView.Adapter<SoundHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoundHolder {
             val binding = DataBindingUtil.inflate<ItemSoundBinding>(
@@ -39,12 +45,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        override fun getItemCount(): Int {
-            return 0
-        }
+        override fun getItemCount() =  sounds.size
 
         override fun onBindViewHolder(holder: SoundHolder, position: Int) {
-            TODO("Not yet implemented")
+
         }
 
     }
